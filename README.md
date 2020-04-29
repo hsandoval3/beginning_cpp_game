@@ -6,4 +6,15 @@ To fix SDL2 include error:
 include <SDL2/SDL.h>
 
 To compile:  
-g++ main.cpp -o main -lSDL2
+``` shell
+mkdir build && cd build
+cmake ..
+make
+```
+
+### Might need some software
+libsdl2-dev (maybe)
+libsdl2-2.0-0
+cmake
+clang
+clang tidy
