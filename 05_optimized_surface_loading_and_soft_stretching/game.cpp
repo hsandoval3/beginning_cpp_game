@@ -37,9 +37,9 @@ bool Game::loadMedia(string filename)
 	//Loading success flag
 	auto success{true};
 
-	//Load splash image
-	gXout = SDL_LoadBMP(filename.c_str());
-	if(gXout == nullptr)
+	//Load stretching surface
+	gCurrentSurface = loadSurface( filename.c_str() );
+	if( gCurrentSurface == nullptr )
 	{
 		cout << "Unable to load image " << filename << "! SDL Error: " << SDL_GetError() << endl;
 		success = false;
@@ -48,11 +48,38 @@ bool Game::loadMedia(string filename)
 	return success;
 }
 
+SDL_Surface* Game::loadSurface(string path)
+{
+	//The final optimized image
+	SDL_Surface* optimizedSurface{nullptr};
+
+	//Load image at specified path
+	SDL_Surface* loadedSurface = SDL_LoadBMP( path.c_str() );
+	if( loadedSurface == nullptr )
+	{
+		cout << "Unable to load image " << path.c_str() << "! SDL Error: " << SDL_GetError() << endl;
+	}
+	else
+	{
+		//Convert surface to screen format
+		optimizedSurface = SDL_ConvertSurface( loadedSurface, gScreenSurface->format, 0 );
+		if( optimizedSurface == nullptr )
+		{
+			cout << "Unable to optimize image " << path.c_str() << "! SDL Error: " << SDL_GetError() << endl;
+		}
+
+		//Get rid of old loaded surface
+		SDL_FreeSurface( loadedSurface );
+	}
+
+	return optimizedSurface;
+}
+
 void Game::close()
 {
 	//Deallocate surface
-	SDL_FreeSurface( gXout );
-	gXout = nullptr;
+	SDL_FreeSurface( gCurrentSurface );
+	gCurrentSurface = nullptr;
 
 	//Destroy window
 	SDL_DestroyWindow( gWindow );
@@ -83,15 +110,23 @@ void Game::event()
 			}
 		}
 
-		draw();
+		//Apply the image stretched
+		SDL_Rect stretchRect;
+		stretchRect.x = 0;
+		stretchRect.y = 0;
+		stretchRect.w = SCREEN_WIDTH;
+		stretchRect.h = SCREEN_HEIGHT;
+		
+		draw(stretchRect);
 	}
+		
 }
 
-void Game::draw()
+void Game::draw(SDL_Rect img)
 {
     //Apply the image
-    SDL_BlitSurface(gXout, nullptr, gScreenSurface, nullptr);
-    
-    //Update the surface
-    SDL_UpdateWindowSurface( gWindow );
+	SDL_BlitScaled( gCurrentSurface, nullptr, gScreenSurface, &img );
+
+	//Update the surface
+	SDL_UpdateWindowSurface( gWindow );
 }

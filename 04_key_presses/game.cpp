@@ -39,7 +39,7 @@ bool Game::loadMedia(string press, string up, string down, string left, string r
 
 	//Load default surface
 	gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] = loadSurface(press.c_str());
-	if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] == NULL )
+	if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] == nullptr )
 	{
 		cout << "Unable to load image " << press << "! SDL Error: " << SDL_GetError() << endl;
 		success = false;
@@ -47,7 +47,7 @@ bool Game::loadMedia(string press, string up, string down, string left, string r
 	
 	//Load up surface
 	gKeyPressSurfaces[ KEY_PRESS_SURFACE_UP ] = loadSurface(up.c_str());
-	if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_UP ] == NULL )
+	if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_UP ] == nullptr )
 	{
 		cout << "Unable to load image " << up << "! SDL Error: " << SDL_GetError() << endl;
 		success = false;
@@ -55,7 +55,7 @@ bool Game::loadMedia(string press, string up, string down, string left, string r
 	
 	//Load down surface
 	gKeyPressSurfaces[ KEY_PRESS_SURFACE_DOWN ] = loadSurface(down.c_str());
-	if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_DOWN ] == NULL )
+	if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_DOWN ] == nullptr )
 	{
 		cout << "Unable to load image " << down << "! SDL Error: " << SDL_GetError() << endl;
 		success = false;
@@ -63,7 +63,7 @@ bool Game::loadMedia(string press, string up, string down, string left, string r
 	
 	//Load left surface
 	gKeyPressSurfaces[ KEY_PRESS_SURFACE_LEFT ] = loadSurface(left.c_str());
-	if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_LEFT ] == NULL )
+	if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_LEFT ] == nullptr )
 	{
 		cout << "Unable to load image " << left << "! SDL Error: " << SDL_GetError() << endl;
 		success = false;
@@ -71,7 +71,7 @@ bool Game::loadMedia(string press, string up, string down, string left, string r
 
 	//Load right surface
 	gKeyPressSurfaces[ KEY_PRESS_SURFACE_RIGHT ] = loadSurface(right.c_str());
-	if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_RIGHT ] == NULL )
+	if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_RIGHT ] == nullptr )
 	{
 		cout << "Unable to load image " << right << "! SDL Error: " << SDL_GetError() << endl;
 		success = false;
@@ -85,7 +85,7 @@ SDL_Surface* Game::loadSurface(string path)
 	//Load image at specified path
 	SDL_Surface* loadedSurface = SDL_LoadBMP( path.c_str() );
 
-	if( loadedSurface == NULL )
+	if( loadedSurface == nullptr )
 	{
 		cout << "Unable to load image " << path.c_str() <<"! SDL Error: " << path.c_str() << endl;
 	}

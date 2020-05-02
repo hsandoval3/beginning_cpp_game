@@ -9,8 +9,8 @@ int main( int argc, char* args[] )
 {
 	Game game;
 
-    string filename{"03_event_driven_programming/x.bmp"};
-
+    string image{"05_optimized_surface_loading_and_soft_stretching/stretch.bmp"};
+	
 	//Start up SDL and create window
 	if( !game.init() )
 	{
@@ -19,7 +19,7 @@ int main( int argc, char* args[] )
 	else
 	{
 		//Load media
-		if( !game.loadMedia(filename) )
+		if( !game.loadMedia(image) )
 		{
 			cout << "Failed to load media!\n";
 		}
