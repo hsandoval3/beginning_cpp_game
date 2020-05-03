@@ -5,7 +5,7 @@ and may not be redistributed without written permission.*/
 #include <iostream>
 using namespace std;
 
-int main( int argc, char* args[] )
+int main()
 {
 	Game game;
 
